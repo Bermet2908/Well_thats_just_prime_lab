@@ -5,6 +5,17 @@
 
 #include "../src/prime.hpp"
 
-TEST_CASE( "#prime" ) {
-    REQUIRE( prime() == "You can delete this function and replace it with your own!" );
+TEST_CASE("primeFactors handles numbers <= 1") {
+    Factorizer f;
+    REQUIRE(f.primeFactors(0).empty());
+    REQUIRE(f.primeFactors(1).empty());
+    REQUIRE(f.primeFactors(-8).empty());
+}
+
+TEST_CASE("primeFactors finds factors") {
+    Factorizer f;
+    REQUIRE(f.primeFactors(9) == std::vector<int>{3, 3});
+    REQUIRE(f.primeFactors(12) == std::vector<int>{2, 2, 3});
+    REQUIRE(f.primeFactors(28) == std::vector<int>{2, 2, 7});
+    REQUIRE(f.primeFactors(17) == std::vector<int>{17});
 }
